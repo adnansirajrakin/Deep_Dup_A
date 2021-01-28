@@ -10,6 +10,22 @@ In the repository, we provide a sample code to implement Deep_DupA attack for CI
 
 ## Commands to Run the code:
 
+# VGG-11 targeted Attack
+python VGG_tar_final.py 
+
+or
+# ResNet-20 targeted Attack
+python Res_tar_final.py
+
+or
+
+# ResNet-20 un-targeted Attack
+python res_un.py
+
+or
+
+# VGG-11 un-targeted Attack
+python vgg_uni.py
 
 
 

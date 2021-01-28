@@ -28,6 +28,7 @@ or
 python vgg_uni.py
 
 
+Attack.py contains the P-DES code. Any model can be used to attack using the attack module in attack.py. The code is general and works on any dataset or model.
 
 ## Parameters:
 

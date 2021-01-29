@@ -287,20 +287,13 @@ class DES_new(object):
         
         
         param_flat=params.view(-1) ## 1D flattended
-        param_new1 = param_flat[200].detach().clone()
-        param_new2 = param_flat[400] .detach().clone()
-        param_flat[200]=0
-        param_flat[400]=0
+       
         param_flat = torch.flip(param_flat,[0]) ## flipping to make right shift real AWD genrates right shift thats why
         for y in range(self.S*ranging): 
             param_flat[f_index+y]=param_flat[f_index+ranging+y]  ## shifting the values 
         param_flat = torch.flip(param_flat,[0]) 
-        param_flat[200]=param_new1
-        param_flat[400]=param_new2
+      
         param2 = param_flat.view(params.size())  # putting it back to the original matrix
-        
-       
-
         param_flipped=param2.detach().clone() ## copying the parameters
 
         return param_flipped
@@ -319,10 +312,7 @@ class DES_new(object):
         
 
         param_flat=params.view(-1)
-        param_new1 = params.view(-1)[200].detach().clone()
-        param_new2 = params.view(-1)[400] .detach().clone()
-        param_flat[200]=0
-        param_flat[400]=0
+        
         param_flat = torch.flip(param_flat,[0])
         for y in range(self.S*ranging):
             print("Old value, new value:")
@@ -330,9 +320,7 @@ class DES_new(object):
             param_flat[f_index+y]=param_flat[f_index+ranging+y]  ## shifting the values 
         param_flat = torch.flip(param_flat,[0])
 
-        param_flat[200]=param_new1
-        param_flat[400]=param_new2
-
+      
         param2 = param_flat.view(params.size())
        
         param_flipped=param2.detach().clone() ## copying the parameters

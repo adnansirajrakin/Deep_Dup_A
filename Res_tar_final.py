@@ -31,15 +31,14 @@ dataset_path='./cifar10'
 
 
 # ---------------------- Hyper Parameter ---------------------------
-iteration = 100 ## number of attack iteration
+iteration = 1000 ## number of attack iteration
 picks = 500 # numberof weights picked
 weight_p_clk = 2 ## number of weights at each package constant throughout the paper
 shift_p_clk = 1  ## number of clock shift at each iteration constant thourghout the paper
 evolution = 500  ## number of evolution = picks = number of initial candidate chosen
 targeted = 8  ## target attack class if targetd attack
 BATCH_SIZE =256 ## batch_size
-
-
+probab =0.8 # AWD success probability $f_p$
 
 
 
@@ -133,7 +132,7 @@ for batch_idx, (data, target) in enumerate(test_loader):
 
 # ----------------------------- Attack Setup -------------------------------------------
 
-attacker = DES_new(criterion, k_top=picks, w_clk=weight_p_clk, s_clk=shift_p_clk,evolution= evolution)
+attacker = DES_new(criterion, k_top=picks, w_clk=weight_p_clk, s_clk=shift_p_clk,evolution= evolution,probab=probab)
 xs=[]
 ys=[]
 ASR=torch.zeros([iteration])
@@ -166,6 +165,11 @@ test_loader = torch.utils.data.DataLoader(
                          transform=test_transform),
         batch_size=256, shuffle=False)
 # ------------------------------------------------------------ Attacking -------------------------------------------------------------
+probab =0.8
+prob_tab = torch.zeros([20,36864]).fill_(probab)
+binar = torch.bernoulli(prob_tab).fill_(1)
+
+print(binar.size())
 for i in range(iteration):
         print("epoch:",i+1)
         xs,ys=attacker.progressive_search(model.cuda(), datas.cuda(), targets.long().cuda(),xs,ys)
@@ -173,7 +177,7 @@ for i in range(iteration):
         _,ASR[i]=validate(model, device, criterion, test_loader, 0)
         _,acc[i] = validate1(model, device, criterion, test_loader,datas1.cuda(),targets1.long().cuda(), 0)
        
-        if float(acc[i])< 1.00:
+        if float(acc[i])< 2.00:
             break
 
 ## finally printing out exactly how many weights different compared to the original model

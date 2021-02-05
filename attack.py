@@ -26,7 +26,7 @@ import torch as th
 from model import quan_Linear,quan_Conv2d
 
 class DES_new(object):
-    def __init__(self, criterion, k_top=50, w_clk=1, s_clk=1, evolution=1000):
+    def __init__(self, criterion, k_top=50, w_clk=1, s_clk=1, evolution=1000,probab =1 ):
         
         self.criterion = criterion.cuda() 
         # init a loss_dict to log the loss w.r.t each layer
@@ -41,7 +41,8 @@ class DES_new(object):
         self.total=0
         ##evolution z
         self.epoch=evolution
-
+        self.probab = probab ## probability of hard ware attack success rate $f_p$
+        print(self.probab)
     def shift(self, m,f_index):
         ''' performs the s_clk number of shift starting at index f_index given a layers weights m'''
 
@@ -154,7 +155,7 @@ class DES_new(object):
             
 
             ## denormalization of x and y
-            mut_x=int(mut_x*layers)
+            mut_x=int(mut_x*(layers-1))
            
             n=0
             for m in model.modules():
@@ -168,18 +169,21 @@ class DES_new(object):
             mut_y = int(mut_y)
 
             #compute the new objective for the new mutant vector
-            obj_new = 100000
+            obj_new = obj_func[h]*0.99
             n=0
             for m in model.modules():
                 if isinstance(m, quan_Conv2d) or isinstance(m, quan_Linear):
                     
                     if n == mut_x:
-                        clean_weight = m.weight.data.detach().clone()
-                        attack_weight=self.shift( m,mut_y)
-                        m.weight.data = attack_weight
-                        output=model(data)
-                        obj_new=self.criterion(output,target).item() ## new mutation function evaluation at mut_x and mut_y
-                        m.weight.data= clean_weight
+                        prob =torch.Tensor([self.probab]) ## checking if the shift will be successful in hardware
+                        prob_out = torch.bernoulli(prob)
+                        if prob_out == 1:
+                            clean_weight = m.weight.data.detach().clone()
+                            attack_weight=self.shift( m,mut_y)
+                            m.weight.data = attack_weight
+                            output=model(data)
+                            obj_new=self.criterion(output,target).item() ## new mutation function evaluation at mut_x and mut_y
+                            m.weight.data= clean_weight
                     n=n+1
 
             
@@ -196,7 +200,13 @@ class DES_new(object):
       
         # set the model to evaluation mode
         model.eval()
-       
+
+        ## checking if the iteration end shift will be successful in hardware
+        probab =self.probab
+        prob =torch.Tensor([probab])
+        prob_outs = torch.bernoulli(prob)
+        
+
        
         # calculating total number of layers in the model we just attack convolution and linear layers
         n=0
@@ -214,85 +224,94 @@ class DES_new(object):
         y=torch.randint(0, layers, ([self.k_top]))
         y_max=torch.randint(0, layers, ([self.k_top])).float()
 
+        if prob_outs == 1: 
         ## start the evolution
-        for i in range(self.epoch):
+            for i in range(self.epoch):
+            
             # only calculate the initial population objective for iteration 0
-            if i == 0:
-                for k in range(self.k_top ):
-                    n=0
-                    for m in model.modules():
-                        if isinstance(m, quan_Conv2d) or isinstance(m, quan_Linear):
+                if i == 0:
+                    for k in range(self.k_top ):
+                        n=0
+                        for m in model.modules():
+                            if isinstance(m, quan_Conv2d) or isinstance(m, quan_Linear):
                             
-                            if n == x[k]:
-                                clean_weight = m.weight.data.detach().clone()
-                                y[k]=torch.from_numpy(np.random.choice(int(m.weight.data.view(-1).detach().size()[0]-2*self.N*self.S), size=(1), replace=False)) 
-                                y_max[k]= m.weight.data.view(-1).detach().size()[0]-2*self.N*self.S ## for each y value corresponding maximum y_max
-                                attack_weight=self.shift( m,y[k]) # attack 
-                                m.weight.data = attack_weight
-                                output=model(data)
-                                obj_func[k]=self.criterion(output,target).item() ## evaluate fitness function
-                                m.weight.data = clean_weight ## recover the weights
+                                if n == x[k]:
+                                    clean_weight = m.weight.data.detach().clone()
+                                    y[k]=torch.from_numpy(np.random.choice(int(m.weight.data.view(-1).detach().size()[0]-2*self.N*self.S), size=(1), replace=False)) 
+                                    y_max[k]= m.weight.data.view(-1).detach().size()[0]-2*self.N*self.S ## for each y value corresponding maximum y_max
+                                    prob =torch.Tensor([probab])
+                                    prob_out = torch.bernoulli(prob)
+                                    if prob_out == 1: ## checking if the shift will be successful in hardware
+                                        attack_weight=self.shift( m,y[k]) # attack 
+                                        m.weight.data = attack_weight
+                                        output=model(data)
+                                        obj_func[k]=self.criterion(output,target).item() ## evaluate fitness function
+                                        m.weight.data = clean_weight ## recover the weights
                                 #print(obj_func[k])
-                            n=n+1
+                                n=n+1
             
             #perfomr four mutation strategy for each population candidate
-            for z in range(4):
-                obj_func ,x ,y = self.mutation(model,data,target,obj_func,x,y,layers,y_max, i, mutation=z)
+                for z in range(4):
+                    obj_func ,x ,y = self.mutation(model,data,target,obj_func,x,y,layers,y_max, i, mutation=z)
 
         ## This part checks if any previous shift were done at the best objective function index
-        count = 0
-        number = 0
-        _,indx = obj_func.topk(self.k_top)
+            count = 0
+            number = 0
+            _,indx = obj_func.topk(self.k_top)
         
         ## This part checks if any previous shift were done at the best objective function index
-        for k in range(indx.size()[0]):
-            for i in range(len(xs)):
-                if (x[indx[number]],y[indx[number]]) == ( xs[i], ys[i]):
-                    count = 1
-            if count == 1:
-                number =  number +1
-                count= 0
-            else:
-                break
+            for k in range(indx.size()[0]):
+                for i in range(len(xs)):
+                    if (x[indx[number]],y[indx[number]]) == ( xs[i], ys[i]):
+                        count = 1
+                if count == 1:
+                    number =  number +1
+                    count= 0
+                else:
+                    break
 
 
                 
         #This part checks if any previous shift were done at the best objective function index -1
-        for k in range(indx.size()[0]):
-            for i in range(len(xs)):
-                if (x[indx[number]],y[indx[number]]) == ( xs[i], ys[i]+1):
-                    count = 1
-            if count == 1:
-                number =  number +1
-                count=0
-            else:
-                break
+            for k in range(indx.size()[0]):
+                for i in range(len(xs)):
+                    if (x[indx[number]],y[indx[number]]) == ( xs[i], ys[i]+1):
+                        count = 1
+                if count == 1:
+                    number =  number +1
+                    count=0
+                else:
+                    break
         #This part checks if any previous shift were done at the best objective function index +1 since the attack effects two weights
-        for k in range(indx.size()[0]):
-            for i in range(len(xs)):
-                if (x[indx[number]],y[indx[number]]) == ( xs[i], ys[i]-1):
-                    count = 1
-            if count == 1:
-                number =  number +1
-                count=0
-            else:
-                break
+            for k in range(indx.size()[0]):
+                for i in range(len(xs)):
+                    if (x[indx[number]],y[indx[number]]) == ( xs[i], ys[i]-1):
+                        count = 1
+                if count == 1:
+                    number =  number +1
+                    count=0
+                else:
+                    break
         ## the reason we need to do that because lets assume attack at index 2 [1,2,3,4] after a shift [1,1,2,4] so basically we can not attack [. X X X] (2+1) and (2-1) anymore.
                 
-        print(number)
+            print(number)
         ## after the check 'number' will indicate the index where we perform the shift (x[indx[number]],y[indx[number]])
-        xs.append(x[indx[number]])
-        ys.append(y[indx[number]])
-        n=0
-        for m in model.modules():
-            if isinstance(m, quan_Conv2d) or isinstance(m, quan_Linear):
-                #print(n,name)
-               if n==x[indx[number]]:
+            
+            # Final shift at winner candidate hardwware check was done at the beginning.
+            prob_out = 1
+            if prob_out == 1:
+                xs.append(x[indx[number]])
+                ys.append(y[indx[number]])
+                n=0
+                for m in model.modules():
+                    if isinstance(m, quan_Conv2d) or isinstance(m, quan_Linear):
+                        #print(n,name)
+                        if n==x[indx[number]]:
                 #print(name, self.loss.item(), loss_max)
-                   attack_weight = self.shift2(m,y[indx[number]])
-                   m.weight.data = attack_weight
-               n=n+1
+                            attack_weight = self.shift2(m,y[indx[number]])
+                            m.weight.data = attack_weight
+                        n=n+1
 
-        print("Layer numer, Index Number: ", x[indx[number]],y[indx[number]])
+                print("Layer numer, Index Number: ", x[indx[number]],y[indx[number]])
         
         return xs,ys

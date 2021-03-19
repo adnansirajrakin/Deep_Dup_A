@@ -14,7 +14,6 @@ from xlwt import Workbook
 import argparse
 import torch.optim as optim
 from torchvision import datasets, transforms
-# from utils import AverageMeter, RecorderMeter, time_string, convert_secs2time
 import torch.backends.cudnn as cudnn
 cudnn.benchmark = True
 import random

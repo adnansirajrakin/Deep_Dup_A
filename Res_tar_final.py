@@ -158,7 +158,7 @@ for batch_idx, (data, target) in enumerate(test_loader):
             datas1[count-500,:,:,:]=data[0,:,:,:]
             targets1[count-500] = target[0]
         count = count + 1
-print(targets1.size())
+
 
 test_loader = torch.utils.data.DataLoader(
         datasets.CIFAR10(dataset_path, train=False, 
@@ -169,7 +169,6 @@ probab =0.8
 prob_tab = torch.zeros([20,36864]).fill_(probab)
 binar = torch.bernoulli(prob_tab).fill_(1)
 
-print(binar.size())
 for i in range(iteration):
         print("epoch:",i+1)
         xs,ys=attacker.progressive_search(model.cuda(), datas.cuda(), targets.long().cuda(),xs,ys)

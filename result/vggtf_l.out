@@ -1,0 +1,141 @@
+Traceback (most recent call last):
+  File "VGG_tar_final.py", line 28, in <module>
+    from attack import DES_new
+  File "/home/asrakin/updated/github/attack.py", line 158
+    if mut_x == 0
+                ^
+SyntaxError: invalid syntax
+Files already downloaded and verified
+torch.Size([64, 3, 3, 3]) 1
+torch.Size([128, 64, 3, 3]) 2
+torch.Size([256, 128, 3, 3]) 3
+torch.Size([256, 256, 3, 3]) 4
+torch.Size([512, 256, 3, 3]) 5
+torch.Size([512, 512, 3, 3]) 6
+torch.Size([512, 512, 3, 3]) 7
+torch.Size([512, 512, 3, 3]) 8
+torch.Size([512, 512]) 9
+torch.Size([512, 512]) 10
+torch.Size([10, 512]) 11
+
+Test set: Average loss: 0.0019, Accuracy: 9027/10000 (90.2700%)
+
+torch.Size([500])
+epoch: 1
+Number of layers: 11
+0
+Old value, new value:
+tensor(8., device='cuda:0') tensor(2., device='cuda:0')
+Old value, new value:
+tensor(3., device='cuda:0') tensor(-3., device='cuda:0')
+Layer numer, Index Number:  tensor(10, dtype=torch.int32) tensor(645, dtype=torch.int32)
+
+Test set: Average loss: 0.0019, Accuracy: 9028/10000 (90.2800%)
+
+
+Test set: Average loss: 0.0006, Accuracy: 468/5000.0 (93.6000%)
+
+epoch: 2
+Number of layers: 11
+0
+Old value, new value:
+tensor(9., device='cuda:0') tensor(-4., device='cuda:0')
+Old value, new value:
+tensor(0., device='cuda:0') tensor(3., device='cuda:0')
+Layer numer, Index Number:  tensor(10, dtype=torch.int32) tensor(947, dtype=torch.int32)
+
+Test set: Average loss: 0.0019, Accuracy: 9026/10000 (90.2600%)
+
+
+Test set: Average loss: 0.0007, Accuracy: 467/5000.0 (93.4000%)
+
+epoch: 3
+Number of layers: 11
+0
+Old value, new value:
+tensor(-2., device='cuda:0') tensor(-6., device='cuda:0')
+Old value, new value:
+tensor(2., device='cuda:0') tensor(-4., device='cuda:0')
+Layer numer, Index Number:  tensor(10, dtype=torch.int32) tensor(654, dtype=torch.int32)
+
+Test set: Average loss: 0.0019, Accuracy: 9024/10000 (90.2400%)
+
+
+Test set: Average loss: 0.0007, Accuracy: 467/5000.0 (93.4000%)
+
+epoch: 4
+Number of layers: 11
+0
+Old value, new value:
+tensor(3., device='cuda:0') tensor(0., device='cuda:0')
+Old value, new value:
+tensor(7., device='cuda:0') tensor(-2., device='cuda:0')
+Layer numer, Index Number:  tensor(10, dtype=torch.int32) tensor(1010, dtype=torch.int32)
+
+Test set: Average loss: 0.0019, Accuracy: 9019/10000 (90.1900%)
+
+
+Test set: Average loss: 0.0007, Accuracy: 462/5000.0 (92.4000%)
+
+epoch: 5
+Number of layers: 11
+0
+Old value, new value:
+tensor(1., device='cuda:0') tensor(0., device='cuda:0')
+Old value, new value:
+tensor(3., device='cuda:0') tensor(-5., device='cuda:0')
+Layer numer, Index Number:  tensor(10, dtype=torch.int32) tensor(806, dtype=torch.int32)
+
+Test set: Average loss: 0.0019, Accuracy: 9020/10000 (90.2000%)
+
+
+Test set: Average loss: 0.0007, Accuracy: 462/5000.0 (92.4000%)
+
+epoch: 6
+Number of layers: 11
+Files already downloaded and verified
+torch.Size([64, 3, 3, 3]) 1
+torch.Size([128, 64, 3, 3]) 2
+torch.Size([256, 128, 3, 3]) 3
+torch.Size([256, 256, 3, 3]) 4
+torch.Size([512, 256, 3, 3]) 5
+torch.Size([512, 512, 3, 3]) 6
+torch.Size([512, 512, 3, 3]) 7
+torch.Size([512, 512, 3, 3]) 8
+torch.Size([512, 512]) 9
+torch.Size([512, 512]) 10
+torch.Size([10, 512]) 11
+
+Test set: Average loss: 0.0019, Accuracy: 8974/10000 (89.7400%)
+
+torch.Size([500])
+epoch: 1
+Number of layers: 11
+0
+Old value, new value:
+tensor(-5., device='cuda:0') tensor(-69., device='cuda:0')
+Old value, new value:
+tensor(49., device='cuda:0') tensor(-16., device='cuda:0')
+Layer numer, Index Number:  tensor(1, dtype=torch.int32) tensor(-1, dtype=torch.int32)
+
+Test set: Average loss: 0.0019, Accuracy: 8968/10000 (89.6800%)
+
+
+Test set: Average loss: 0.0007, Accuracy: 461/5000.0 (92.2000%)
+
+epoch: 2
+Number of layers: 11
+0
+Old value, new value:
+tensor(8., device='cuda:0') tensor(16., device='cuda:0')
+Old value, new value:
+tensor(-30., device='cuda:0') tensor(8., device='cuda:0')
+Layer numer, Index Number:  tensor(1, dtype=torch.int32) tensor(16134, dtype=torch.int32)
+
+Test set: Average loss: 0.0019, Accuracy: 8969/10000 (89.6900%)
+
+
+Test set: Average loss: 0.0007, Accuracy: 461/5000.0 (92.2000%)
+
+epoch: 3
+Number of layers: 11

@@ -34,7 +34,7 @@ Attack.py contains the P-DES code. Any model can be used to attack using the att
 
 iteration = number of attack iteration
 
-picks = numberof weights picked
+picks = number of weights picked
 
 weight_p_clk = number of weights at each package constant throughout the paper
 
@@ -45,6 +45,8 @@ evolution = number of evolution = picks = number of initial candidate chosen
 targeted = target attack class if targetd attack
 
 BATCH_SIZE = batch_size
+
+probab =  AWD success probability f_p in the paper.
 
 
 

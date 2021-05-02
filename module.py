@@ -44,7 +44,7 @@ def validate1(model, device, criterion, val_loader, datas1,targets1,epoch):
 
     test_loss /= 500
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.4f}%)\n'.format(
-        test_loss, correct, val_loader.sampler.__len__()/2,
+        test_loss, correct, 500,
         100. * correct / 500))
     
     return test_loss, 100. * correct / 500

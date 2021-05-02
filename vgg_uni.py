@@ -25,17 +25,29 @@ from module import validate,validate1,bin2int,weight_conversion,int2bin
 from model import vgg11_bn,quan_Linear,quan_Conv2d,ResNetBasicblock,DownsampleA,CifarResNet
 from attack import DES_new
 import torch as th
-# datapath for the workstation
-dataset_path='./cifar10'
+import argparse
 
-iteration = 1000 ## number of attack iteration
-picks = 500 # numberof weights picked
+
+parser = argparse.ArgumentParser(description='Deep Dup A')
+parser.add_argument('--iteration', type=int, default=1000, help='Attack Iterations')
+parser.add_argument('--z', type=int, default=500, help='evolution z')
+parser.add_argument('--batch-size',  type=int, default=256, help='input batch size for 256 default')
+parser.add_argument('--probab',  type=float, default=1, help='probability of a successfull hardware AWD attack at a location')
+parser.add_argument('--data', type=str, default='./cifar10', help='data path')
+args = parser.parse_args()
+print(args)
+
+# datapath for the workstation
+# datapath for the workstation
+dataset_path= args.data
+iteration = args.iteration ## number of attack iteration
+picks = args.z # number of weights picked initially
 weight_p_clk = 2 ## number of weights at each package constant throughout the paper
 shift_p_clk = 1  ## number of clock shift at each iteration constant thourghout the paper
-evolution = 500  ## number of evolution = picks = number of initial candidate chosen
-targeted = 8  ## target attack class if targetd attack
-BATCH_SIZE =256 ## batch_size
-probab =0.8 # AWD success probability $f_p$
+evolution = args.z  ## number of evolution = picks = number of initial candidate chosen =z
+targeted = 8  ## ignore
+BATCH_SIZE =args.batch_size ## batch_size
+probab = args.probab # AWD success probability $f_p$
 
 #------------------------------model ----------------------------------------------------------------------------------------------------
 net=vgg11_bn()

@@ -26,20 +26,32 @@ import torch as th
 from module import validate,validate1,bin2int,weight_conversion,int2bin
 from model import vgg11_bn,quan_Linear,quan_Conv2d,ResNetBasicblock,DownsampleA,CifarResNet
 from attack import DES_new
+import argparse
+
+parser = argparse.ArgumentParser(description='Deep Dup A')
+parser.add_argument('--iteration', type=int, default=1000, help='Attack Iterations')
+parser.add_argument('--z', type=int, default=500, help='evolution z')
+parser.add_argument('--batch-size',  type=int, default=256, help='input batch size for 256 default')
+parser.add_argument('--probab',  type=float, default=1, help='probability of a successfull hardware AWD attack at a location')
+parser.add_argument('--data', type=str, default='./cifar10', help='data path')
+parser.add_argument('--target', type=int, default=8, help='Target Class')
+args = parser.parse_args()
+print(args)
 
 # datapath for the workstation
-dataset_path='./cifar10'
+dataset_path= args.data
+
 
 
 ## hypter parameters
-iteration = 2000 ## number of attack iteration
-picks = 500 # numberof weights picked
+iteration = args.iteration ## number of attack iteration
+picks = args.z # number of weights picked initially
 weight_p_clk = 2 ## number of weights at each package constant throughout the paper
 shift_p_clk = 1  ## number of clock shift at each iteration constant thourghout the paper
-evolution = 500  ## number of evolution = picks = number of initial candidate chosen
-targeted = 8  ## target attack class if targetd attack
-BATCH_SIZE =256 ## batch_size
-probab = 0.8 # AWD success probability $f_p$
+evolution = args.z  ## number of evolution = picks = number of initial candidate chosen =z
+targeted = args.target  ## target class
+BATCH_SIZE =args.batch_size ## batch_size
+probab = args.probab # AWD success probability $f_p$
 
 
 #----------------------model--------------------------------------------------
@@ -137,9 +149,10 @@ test_loader = torch.utils.data.DataLoader(
                          transform=test_transform),
         batch_size=1, shuffle=False)
 
-datas=torch.zeros([256,3,32,32])
-targets=torch.zeros([256])
-datas1=torch.zeros([500,3,32,32])
+# ------------------------------------------------------------ Data division -------------------------------------------------------------
+datas=torch.zeros([256,3,32,32]) # attack batch
+targets=torch.zeros([256]) 
+datas1=torch.zeros([500,3,32,32]) # evaluation batch
 targets1=torch.zeros([500])
 count=0
 for batch_idx, (data, target) in enumerate(test_loader):
@@ -164,16 +177,18 @@ test_loader = torch.utils.data.DataLoader(
 
 
 for i in range(iteration):
-
         print("epoch:",i+1)
         xs,ys=attacker.progressive_search(model.cuda(), datas.cuda(), targets.long().cuda(),xs,ys)
         #print(xs[i],ys[i])
+        print("Test Accuracy (%)")
         _,ASR[i]=validate(model, device, criterion, test_loader, 0)
+        print("Test Accuracy of Target Class (%)")
         _,acc[i] = validate1(model, device, criterion, test_loader,datas1.cuda(),targets1.long().cuda(), 0)
         
         if float(acc[i])< 2.00:
             break
 
+print(xs,ys)
 ## finally printing out exactly how many weights different compared to the original model
 i=0
 for name, m in model.named_modules():

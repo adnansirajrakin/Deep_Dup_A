@@ -60,7 +60,7 @@ class DES_new(object):
         
         param_flat=params.view(-1) ## 1D flattended
        
-        param_flat = torch.flip(param_flat,[0]) ## flipping to make right shift real AWD genrates right shift thats why
+        param_flat = torch.flip(param_flat,[0]) ## flipping to make right shift real AWD genrates right shift thats why # for specific FPGA this may vary
         for y in range(self.S*ranging): 
             param_flat[f_index+y]=param_flat[f_index+ranging+y]  ## shifting the values 
         param_flat = torch.flip(param_flat,[0]) 
@@ -175,7 +175,7 @@ class DES_new(object):
                 if isinstance(m, quan_Conv2d) or isinstance(m, quan_Linear):
                     
                     if n == mut_x:
-                        prob =torch.Tensor([self.probab]) ## checking if the shift will be successful in hardware
+                        prob =torch.Tensor([self.probab]) ## checking if the shift will be successful in hardware condsidering hardware AWD has a probability = probab to be successful
                         prob_out = torch.bernoulli(prob)
                         if prob_out == 1:
                             clean_weight = m.weight.data.detach().clone()

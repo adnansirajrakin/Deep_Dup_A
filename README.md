@@ -13,6 +13,7 @@ In the repository, we provide a sample code to implement Deep_DupA attack for CI
 python VGG_tar_final.py 
 
 or
+
 2. ResNet-20 targeted Attack
 python Res_tar_final.py
 

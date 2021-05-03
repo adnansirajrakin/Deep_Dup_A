@@ -298,7 +298,7 @@ class DES_new(object):
         ## after the check 'number' will indicate the index where we perform the shift (x[indx[number]],y[indx[number]])
             
             # Final shift at winner candidate hardwware check was done at the beginning.
-            prob_out = 1
+            #prob_out = 1
             if prob_out == 1:
                 xs.append(x[indx[number]])
                 ys.append(y[indx[number]])

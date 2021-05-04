@@ -1,0 +1,355 @@
+Files already downloaded and verified
+CifarResNet : Depth : 20 , Layers for each block : 3
+/home/asrakin/updated/github/model.py:312: UserWarning: nn.init.kaiming_normal is now deprecated in favor of nn.init.kaiming_normal_.
+  init.kaiming_normal(m.weight)
+torch.Size([16, 3, 3, 3]) 1
+torch.Size([16, 16, 3, 3]) 2
+torch.Size([16, 16, 3, 3]) 3
+torch.Size([16, 16, 3, 3]) 4
+torch.Size([16, 16, 3, 3]) 5
+torch.Size([16, 16, 3, 3]) 6
+torch.Size([16, 16, 3, 3]) 7
+torch.Size([32, 16, 3, 3]) 8
+torch.Size([32, 32, 3, 3]) 9
+torch.Size([32, 32, 3, 3]) 10
+torch.Size([32, 32, 3, 3]) 11
+torch.Size([32, 32, 3, 3]) 12
+torch.Size([32, 32, 3, 3]) 13
+torch.Size([64, 32, 3, 3]) 14
+torch.Size([64, 64, 3, 3]) 15
+torch.Size([64, 64, 3, 3]) 16
+torch.Size([64, 64, 3, 3]) 17
+torch.Size([64, 64, 3, 3]) 18
+torch.Size([64, 64, 3, 3]) 19
+torch.Size([10, 64]) 20
+
+Test set: Average loss: 0.0013, Accuracy: 9077/10000 (90.7700%)
+
+epoch: 1
+Number of layers: 20
+0
+Old value, new value:
+tensor(127., device='cuda:0') tensor(-2., device='cuda:0')
+Old value, new value:
+tensor(0., device='cuda:0') tensor(1., device='cuda:0')
+Layer numer, Index Number:  tensor(19, dtype=torch.int32) tensor(24, dtype=torch.int32)
+
+Test set: Average loss: 0.0048, Accuracy: 8184/10000 (81.8400%)
+
+epoch: 2
+Number of layers: 20
+0
+Old value, new value:
+tensor(-2., device='cuda:0') tensor(12., device='cuda:0')
+Old value, new value:
+tensor(-3., device='cuda:0') tensor(13., device='cuda:0')
+Layer numer, Index Number:  tensor(19, dtype=torch.int32) tensor(523, dtype=torch.int32)
+
+Test set: Average loss: 0.0052, Accuracy: 8183/10000 (81.8300%)
+
+epoch: 3
+Number of layers: 20
+0
+Old value, new value:
+tensor(98., device='cuda:0') tensor(-9., device='cuda:0')
+Old value, new value:
+tensor(16., device='cuda:0') tensor(-60., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(13, dtype=torch.int32)
+
+Test set: Average loss: 0.0054, Accuracy: 8055/10000 (80.5500%)
+
+epoch: 4
+Number of layers: 20
+0
+Old value, new value:
+tensor(46., device='cuda:0') tensor(-22., device='cuda:0')
+Old value, new value:
+tensor(36., device='cuda:0') tensor(-39., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(4, dtype=torch.int32)
+
+Test set: Average loss: 0.0062, Accuracy: 7563/10000 (75.6300%)
+
+epoch: 5
+Number of layers: 20
+0
+Old value, new value:
+tensor(53., device='cuda:0') tensor(-70., device='cuda:0')
+Old value, new value:
+tensor(98., device='cuda:0') tensor(45., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(21, dtype=torch.int32)
+
+Test set: Average loss: 0.0095, Accuracy: 6437/10000 (64.3700%)
+
+epoch: 6
+Number of layers: 20
+0
+Old value, new value:
+tensor(-57., device='cuda:0') tensor(57., device='cuda:0')
+Old value, new value:
+tensor(3., device='cuda:0') tensor(55., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(184, dtype=torch.int32)
+
+Test set: Average loss: 0.0107, Accuracy: 5989/10000 (59.8900%)
+
+epoch: 7
+Number of layers: 20
+0
+Old value, new value:
+tensor(43., device='cuda:0') tensor(-46., device='cuda:0')
+Old value, new value:
+tensor(-1., device='cuda:0') tensor(-70., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(18, dtype=torch.int32)
+
+Test set: Average loss: 0.0158, Accuracy: 4890/10000 (48.9000%)
+
+epoch: 8
+Number of layers: 20
+0
+Old value, new value:
+tensor(84., device='cuda:0') tensor(-44., device='cuda:0')
+Old value, new value:
+tensor(18., device='cuda:0') tensor(-68., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(322, dtype=torch.int32)
+
+Test set: Average loss: 0.0182, Accuracy: 4401/10000 (44.0100%)
+
+epoch: 9
+Number of layers: 20
+0
+Old value, new value:
+tensor(-45., device='cuda:0') tensor(27., device='cuda:0')
+Old value, new value:
+tensor(-11., device='cuda:0') tensor(65., device='cuda:0')
+Layer numer, Index Number:  tensor(1, dtype=torch.int32) tensor(865, dtype=torch.int32)
+
+Test set: Average loss: 0.0214, Accuracy: 3997/10000 (39.9700%)
+
+epoch: 10
+Number of layers: 20
+0
+Old value, new value:
+tensor(-82., device='cuda:0') tensor(65., device='cuda:0')
+Old value, new value:
+tensor(20., device='cuda:0') tensor(-48., device='cuda:0')
+Layer numer, Index Number:  tensor(2, dtype=torch.int32) tensor(1785, dtype=torch.int32)
+
+Test set: Average loss: 0.0254, Accuracy: 3846/10000 (38.4600%)
+
+epoch: 11
+Number of layers: 20
+0
+Old value, new value:
+tensor(-87., device='cuda:0') tensor(8., device='cuda:0')
+Old value, new value:
+tensor(-26., device='cuda:0') tensor(66., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(280, dtype=torch.int32)
+
+Test set: Average loss: 0.0295, Accuracy: 3396/10000 (33.9600%)
+
+epoch: 12
+Number of layers: 20
+0
+Old value, new value:
+tensor(47., device='cuda:0') tensor(24., device='cuda:0')
+Old value, new value:
+tensor(-127., device='cuda:0') tensor(3., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(93, dtype=torch.int32)
+
+Test set: Average loss: 0.0327, Accuracy: 3083/10000 (30.8300%)
+
+epoch: 13
+Number of layers: 20
+2
+Old value, new value:
+tensor(-23., device='cuda:0') tensor(-50., device='cuda:0')
+Old value, new value:
+tensor(40., device='cuda:0') tensor(-22., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(1, dtype=torch.int32)
+
+Test set: Average loss: 0.0347, Accuracy: 2875/10000 (28.7500%)
+
+epoch: 14
+Number of layers: 20
+0
+Old value, new value:
+tensor(-41., device='cuda:0') tensor(-122., device='cuda:0')
+Old value, new value:
+tensor(55., device='cuda:0') tensor(-12., device='cuda:0')
+Layer numer, Index Number:  tensor(3, dtype=torch.int32) tensor(1469, dtype=torch.int32)
+
+Test set: Average loss: 0.0380, Accuracy: 2658/10000 (26.5800%)
+
+epoch: 15
+Number of layers: 20
+0
+Old value, new value:
+tensor(-28., device='cuda:0') tensor(25., device='cuda:0')
+Old value, new value:
+tensor(-18., device='cuda:0') tensor(29., device='cuda:0')
+Layer numer, Index Number:  tensor(2, dtype=torch.int32) tensor(199, dtype=torch.int32)
+
+Test set: Average loss: 0.0413, Accuracy: 2489/10000 (24.8900%)
+
+epoch: 16
+Number of layers: 20
+1
+Old value, new value:
+tensor(-37., device='cuda:0') tensor(43., device='cuda:0')
+Old value, new value:
+tensor(-26., device='cuda:0') tensor(30., device='cuda:0')
+Layer numer, Index Number:  tensor(1, dtype=torch.int32) tensor(381, dtype=torch.int32)
+
+Test set: Average loss: 0.0438, Accuracy: 2253/10000 (22.5300%)
+
+epoch: 17
+Number of layers: 20
+0
+Old value, new value:
+tensor(-38., device='cuda:0') tensor(-12., device='cuda:0')
+Old value, new value:
+tensor(-10., device='cuda:0') tensor(23., device='cuda:0')
+Layer numer, Index Number:  tensor(1, dtype=torch.int32) tensor(869, dtype=torch.int32)
+
+Test set: Average loss: 0.0475, Accuracy: 2030/10000 (20.3000%)
+
+epoch: 18
+Number of layers: 20
+0
+Old value, new value:
+tensor(79., device='cuda:0') tensor(-72., device='cuda:0')
+Old value, new value:
+tensor(-6., device='cuda:0') tensor(42., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(363, dtype=torch.int32)
+
+Test set: Average loss: 0.0504, Accuracy: 1790/10000 (17.9000%)
+
+epoch: 19
+Number of layers: 20
+0
+Old value, new value:
+tensor(31., device='cuda:0') tensor(-12., device='cuda:0')
+Old value, new value:
+tensor(26., device='cuda:0') tensor(-20., device='cuda:0')
+Layer numer, Index Number:  tensor(2, dtype=torch.int32) tensor(2077, dtype=torch.int32)
+
+Test set: Average loss: 0.0553, Accuracy: 1730/10000 (17.3000%)
+
+epoch: 20
+Number of layers: 20
+0
+Old value, new value:
+tensor(-25., device='cuda:0') tensor(35., device='cuda:0')
+Old value, new value:
+tensor(-25., device='cuda:0') tensor(43., device='cuda:0')
+Layer numer, Index Number:  tensor(1, dtype=torch.int32) tensor(378, dtype=torch.int32)
+
+Test set: Average loss: 0.0603, Accuracy: 1513/10000 (15.1300%)
+
+epoch: 21
+Number of layers: 20
+0
+Old value, new value:
+tensor(-127., device='cuda:0') tensor(6., device='cuda:0')
+Old value, new value:
+tensor(-5., device='cuda:0') tensor(3., device='cuda:0')
+Layer numer, Index Number:  tensor(1, dtype=torch.int32) tensor(580, dtype=torch.int32)
+
+Test set: Average loss: 0.0645, Accuracy: 1481/10000 (14.8100%)
+
+epoch: 22
+Number of layers: 20
+0
+Old value, new value:
+tensor(6., device='cuda:0') tensor(-64., device='cuda:0')
+Old value, new value:
+tensor(66., device='cuda:0') tensor(16., device='cuda:0')
+Layer numer, Index Number:  tensor(0, dtype=torch.int32) tensor(101, dtype=torch.int32)
+
+Test set: Average loss: 0.0678, Accuracy: 1361/10000 (13.6100%)
+
+epoch: 23
+Number of layers: 20
+0
+Old value, new value:
+tensor(-39., device='cuda:0') tensor(-16., device='cuda:0')
+Old value, new value:
+tensor(-56., device='cuda:0') tensor(62., device='cuda:0')
+Layer numer, Index Number:  tensor(5, dtype=torch.int32) tensor(1822, dtype=torch.int32)
+
+Test set: Average loss: 0.0714, Accuracy: 1256/10000 (12.5600%)
+
+epoch: 24
+Number of layers: 20
+0
+Old value, new value:
+tensor(27., device='cuda:0') tensor(5., device='cuda:0')
+Old value, new value:
+tensor(-36., device='cuda:0') tensor(42., device='cuda:0')
+Layer numer, Index Number:  tensor(2, dtype=torch.int32) tensor(1769, dtype=torch.int32)
+
+Test set: Average loss: 0.0742, Accuracy: 1228/10000 (12.2800%)
+
+epoch: 25
+Number of layers: 20
+0
+Old value, new value:
+tensor(42., device='cuda:0') tensor(42., device='cuda:0')
+Old value, new value:
+tensor(80., device='cuda:0') tensor(-11., device='cuda:0')
+Layer numer, Index Number:  tensor(7, dtype=torch.int32) tensor(1407, dtype=torch.int32)
+
+Test set: Average loss: 0.0776, Accuracy: 1218/10000 (12.1800%)
+
+epoch: 26
+Number of layers: 20
+0
+Old value, new value:
+tensor(-34., device='cuda:0') tensor(49., device='cuda:0')
+Old value, new value:
+tensor(-12., device='cuda:0') tensor(3., device='cuda:0')
+Layer numer, Index Number:  tensor(11, dtype=torch.int32) tensor(5477, dtype=torch.int32)
+
+Test set: Average loss: 0.0819, Accuracy: 1182/10000 (11.8200%)
+
+epoch: 27
+Number of layers: 20
+0
+Old value, new value:
+tensor(22., device='cuda:0') tensor(34., device='cuda:0')
+Old value, new value:
+tensor(-15., device='cuda:0') tensor(63., device='cuda:0')
+Layer numer, Index Number:  tensor(17, dtype=torch.int32) tensor(15539, dtype=torch.int32)
+
+Test set: Average loss: 0.0851, Accuracy: 1156/10000 (11.5600%)
+
+epoch: 28
+Number of layers: 20
+0
+Old value, new value:
+tensor(-24., device='cuda:0') tensor(10., device='cuda:0')
+Old value, new value:
+tensor(-12., device='cuda:0') tensor(24., device='cuda:0')
+Layer numer, Index Number:  tensor(1, dtype=torch.int32) tensor(2253, dtype=torch.int32)
+
+Test set: Average loss: 0.0875, Accuracy: 1092/10000 (10.9200%)
+
+torch.Size([22])
+torch.Size([12])
+torch.Size([8])
+torch.Size([2])
+torch.Size([0])
+torch.Size([2])
+torch.Size([0])
+torch.Size([1])
+torch.Size([0])
+torch.Size([0])
+torch.Size([0])
+torch.Size([2])
+torch.Size([0])
+torch.Size([0])
+torch.Size([0])
+torch.Size([0])
+torch.Size([0])
+torch.Size([2])
+torch.Size([0])
+torch.Size([4])

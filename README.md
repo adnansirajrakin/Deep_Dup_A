@@ -56,7 +56,8 @@ bash requirement.sh
 
 ## CITE our work:
 
-@inproceedings {274646, \n
+@inproceedings {274646,
+
 author = {Adnan Siraj Rakin and Yukui Luo and Xiaolin Xu and Deliang Fan},
 
 title = {Deep-Dup: An Adversarial Weight Duplication Attack Framework to Crush Deep Neural Network in Multi-Tenant {FPGA}},

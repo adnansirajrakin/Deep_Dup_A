@@ -46,8 +46,8 @@ dataset_path= args.data
 ## hypter parameters
 iteration = args.iteration ## number of attack iteration
 picks = args.z # number of weights picked initially
-weight_p_clk = 2 ## number of weights at each package constant throughout the paper
-shift_p_clk = 1  ## number of clock shift at each iteration constant thourghout the paper
+weight_p_clk = 2 ## number of weights at each package 
+shift_p_clk = 1  ## number of clock shift at each iteration
 evolution = args.z  ## number of evolution = picks = number of initial candidate chosen =z
 targeted = args.target  ## target class
 BATCH_SIZE =args.batch_size ## batch_size
